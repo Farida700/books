@@ -15,13 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from shop.views import books
+from shop.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", books, name="books"),
-    path("add-todo/", add_todo, name"add_todo"),
+    path("books/", newbooks, name="newbooks"),
+    path("add-book/", add_book, name="add_book"),
+    path("delete-todo/<id>", delete_todo, name="delete_todo"),
+    path("unmark-todo/<id>", unmark_todo, name="unmark_todo"),
+    path("mark-todo/<id>", mark_todo, name="mark_todo"),
+    path("book-detail/<id>", book_detail, name="book_detail"),
 ]   +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
     +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

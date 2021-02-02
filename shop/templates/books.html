@@ -13,49 +13,49 @@
       <h1 class="text">Добро пожаловать в книжный магазин "ФЛАН"</h1>
     <section>
       <div class="create_container">
-        <form action="{% url 'add-todo' %}" method="POST">
+        <form action="{% url 'add-book' %}" method="POST">
           {% csrf_token %}
           <input
             class="create_input"
             type="text"
             placeholder="Название книги"
-            name="books_text"
+            name="book_title"
           />
           <input
             class="create_input"
             type="text"
             placeholder="Подзаголовок книги"
-            name="books_text"
+            name="book_subtitle"
           />
           <input
             class="create_input"
             type="text"
             placeholder="Описание книги"
-            name="books_text"
+            name="book_decscription"
           />
           <input
             class="create_input"
             type="text"
             placeholder="Стоимость книги"
-            name="books_text"
+            name="book_price"
           />
           <input
             class="create_input"
             type="text"
             placeholder="Жанр книги"
-            name="books_text"
+            name="book_genre"
           />
           <input
             class="create_input"
             type="text"
             placeholder="Автор книги"
-            name="books_text"
+            name="book_author"
           />
           <input
             class="create_input"
             type="text"
             placeholder="Год издания книги"
-            name="books_text"
+            name="book_year"
           />
           <button class="create_button">Добавить</button>
         </form>
@@ -63,7 +63,12 @@
       <div class="todo_container">
         {% for books in books_list %}
         <div
-          class="todo_item {% if todo.is_favorite %} marked {% elif todo.is_closed %} done {% endif %}"
+          class="todo_item 
+          {% if books.is_favorite %} 
+          marked 
+          {% elif books.is_closed %} 
+          done 
+          {% endif %}"
         >
           <div class="todo_item_header">
             <lable class="checkbox_container">
@@ -76,25 +81,19 @@
               <span class="checkmark"></span>
             </lable>
             <h4>
-              <a href="{% url 'closed-todo' todo.id %}">{{ books.text }}</a>
+              <a href="{% url 'closed-todo' book.id %}">{{ books.text }}</a>
             </h4>
           </div>
           <div class="todo_item_footer">
             <p>{{ books.created_at }}</p>
             <div class="action_buttons">
               {% if books.is_favorite %}
-              <a href="{% url 'unmark-todo' todo.id %}"
-                ><img src="{% static './icons/heart.png' %}"
-              /></a>
+              <a href="{% url 'mark-todo' book.id %}"><img src="{% static './icons/heart2.png' %}"/></a>
               {% else %}
-              <a href="{% url 'mark-todo' todo.id %}"
-                ><img src="{% static './icons/heart2.png' %}"
-              /></a>
+              <a href="{% url 'unmark-todo' book.id %}"><img src="{% static './icons/heart.png' %}"/></a>
               {% endif %}
-
-              <a href="{% url 'delete-todo' todo.id %}"
-                ><img src="{% static './icons/basket.png' %}"
-              /></a>
+              <a href="{% url 'delete-todo' book.id %}"><img src="{% static './icons/basket.png' %}"/></a>
+              <a href="{% url 'book-detail' book.id %}"><button>Подробнее</button></a>
             </div>
           </div>
         </div>
