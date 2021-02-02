@@ -9,76 +9,96 @@
     <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}" />
   </head>
   <body>
+      <div class="img"></div>
+      <h1 class="text">Добро пожаловать в книжный магазин "ФЛАН"</h1>
     <section>
       <div class="create_container">
-        <form action="{% url 'add-todo' %}" method = "POST">
+        <form action="{% url 'add-todo' %}" method="POST">
           {% csrf_token %}
           <input
             class="create_input"
             type="text"
             placeholder="Название книги"
-            name = "todo_text"
+            name="todo_text"
           />
-          <button class="create_button">Добавить</button>
-        </form>
-      </div>
-      <div class="create_container">
-        <form action="{% url 'add-todo' %}" method = "POST">
-          {% csrf_token %}
           <input
             class="create_input"
             type="text"
-            placeholder="Автор книги"
-            name = "todo_text"
+            placeholder="Подзаголовок книги"
+            name="todo_text"
           />
-        </form>
-      </div>
-      <div class="create_container">
-        <form action="{% url 'add-todo' %}" method = "POST">
-          {% csrf_token %}
+          <input
+            class="create_input"
+            type="text"
+            placeholder="Описание книги"
+            name="todo_text"
+          />
           <input
             class="create_input"
             type="text"
             placeholder="Стоимость книги"
-            name = "todo_text"
+            name="todo_text"
           />
+          <input
+            class="create_input"
+            type="text"
+            placeholder="Жанр книги"
+            name="todo_text"
+          />
+          <input
+            class="create_input"
+            type="text"
+            placeholder="Автор книги"
+            name="todo_text"
+          />
+          <input
+            class="create_input"
+            type="text"
+            placeholder="Год издания книги"
+            name="todo_text"
+          />
+          <button class="create_button">Добавить</button>
         </form>
       </div>
-
       <div class="todo_container">
-        {% for todo in todo_list %}
-        <div class="todo_item
-            {% if todo.is_favorite %}
-                marked
-              {% elif todo.is_closed %}
-                done
-            {% endif %}
-        ">
+        {% for books in books_list %}
+        <div
+          class="todo_item {% if todo.is_favorite %} marked {% elif todo.is_closed %} done {% endif %}"
+        >
           <div class="todo_item_header">
             <lable class="checkbox_container">
-              <input type="checkbox" 
-                {% if todo.is_closed %}
-                    checked
+              <input
+                type="checkbox"
+                {% if books.is_closed %}
+                checked
                 {% endif %}
               />
               <span class="checkmark"></span>
             </lable>
-            <h4><a href = "{% url 'closed-todo' todo.id %}">{{ todo.text }}</a></h4>
+            <h4>
+              <a href="{% url 'closed-todo' todo.id %}">{{ books.text }}</a>
+            </h4>
           </div>
           <div class="todo_item_footer">
-            <p>{{ todo.created_at }} </p>
+            <p>{{ books.created_at }}</p>
             <div class="action_buttons">
-                {% if todo.is_favorite %}
-                  <a href = "{% url 'unmark-todo' todo.id %}" ><img src="{% static './icons/heart.png' %}" /></a>
-                {% else %}
-                  <a href = "{% url 'mark-todo' todo.id %}" ><img src="{% static './icons/heart2.png' %}" /></a>
-                {% endif %}
+              {% if books.is_favorite %}
+              <a href="{% url 'unmark-todo' todo.id %}"
+                ><img src="{% static './icons/heart.png' %}"
+              /></a>
+              {% else %}
+              <a href="{% url 'mark-todo' todo.id %}"
+                ><img src="{% static './icons/heart2.png' %}"
+              /></a>
+              {% endif %}
 
-              <a href = "{% url 'delete-todo' todo.id %}"><img src="{% static './icons/basket.png' %}" /></a>
+              <a href="{% url 'delete-todo' todo.id %}"
+                ><img src="{% static './icons/basket.png' %}"
+              /></a>
             </div>
           </div>
         </div>
-      {% endfor %}
+        {% endfor %}
       </div>
     </section>
   </body>
