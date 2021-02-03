@@ -25,6 +25,7 @@
           <button class="create_button">Добавить</button>
         </form>
       </div>
+
       <div class="todo_container">
 
         {% for books in books_list %}
@@ -44,10 +45,16 @@
               />
               <span class="checkmark"></span>
             </lable>
-            <h4><a href="{% url 'closed-todo' books.id %}">{{ books.text }}</a></h4>
+            <h4><a href="{% url 'closed-todo' books.id %}">{{ book.title }}</a></h4>
+            <h4>{{ book.subtitle }}</h4>
+            <h4>{{ book.decscription }}</h4>
+            <h4>{{ book.author }}</h4>
+            <h4>{{ book.genre }}</h4>
+            <h4>{{ book.year }}</h4>
           </div>
           <div class="todo_item_footer">
             <p>{{ books.created_at }}</p>
+            <h4>Стоимость {{ book.price }}</h4>
             <div class="action_buttons">
               {% if books.is_favorite %}
                 <a href="{% url 'mark-todo' books.id %}"><img src="{% static './icons/heart2.png' %}"/></a>
