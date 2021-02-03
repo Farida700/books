@@ -9,15 +9,16 @@
     width: 100%;
     height: 500px;
     background-image: url("https://previews.123rf.com/images/leoedition/leoedition1708/leoedition170800390/84001974-banner-online-book-store-book-shelf-or-bookcase-on-the-background.jpg");
-    background-position: absolute;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
 }
 
 .text{
-    font-size: large;
+    font-size: 50px;
     font-style: italic;
     color: red;
+    text-align: center;
 }
 
 section{
@@ -33,18 +34,24 @@ section{
     border: 10px;
     padding: 10px 15px;
     margin-bottom: 20px;
+    justify-content: space-around;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .create_input{
     padding: 15px 15px;
     font-size: 18px;
-    width: 50%;
+    margin-bottom: 20px;
+    width: 30%;
 }
 
 .create_button{
     padding: 12px 20px;
-    background-color: #CE93D8;
-    border: 1px solid  #CE93D8;
+    background-color: rgb(18, 199, 18);
+    border: 1px solid  rgb(247, 195, 64);
     color: white;
     font-size: 18px;
     text-transform: uppercase;

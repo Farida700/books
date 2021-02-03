@@ -13,87 +13,50 @@
       <h1 class="text">Добро пожаловать в книжный магазин "ФЛАН"</h1>
     <section>
       <div class="create_container">
-        <form action="{% url 'add-book' %}" method="POST">
+        <form action="{% url 'add_books' %}" method="POST">
           {% csrf_token %}
-          <input
-            class="create_input"
-            type="text"
-            placeholder="Название книги"
-            name="book_title"
-          />
-          <input
-            class="create_input"
-            type="text"
-            placeholder="Подзаголовок книги"
-            name="book_subtitle"
-          />
-          <input
-            class="create_input"
-            type="text"
-            placeholder="Описание книги"
-            name="book_decscription"
-          />
-          <input
-            class="create_input"
-            type="text"
-            placeholder="Стоимость книги"
-            name="book_price"
-          />
-          <input
-            class="create_input"
-            type="text"
-            placeholder="Жанр книги"
-            name="book_genre"
-          />
-          <input
-            class="create_input"
-            type="text"
-            placeholder="Автор книги"
-            name="book_author"
-          />
-          <input
-            class="create_input"
-            type="text"
-            placeholder="Год издания книги"
-            name="book_year"
-          />
+          <input class="create_input" type="text" placeholder="Название книги" name="book_title"/>
+          <input class="create_input" type="text" placeholder="Подзаголовок книги" name="book_subtitle"/>
+          <input class="create_input" type="text" placeholder="Описание книги" name="book_decscription"/>
+          <input class="create_input" type="text" placeholder="Стоимость книги" name="book_price"/>
+          <input class="create_input" type="text" placeholder="Жанр книги" name="book_genre"/>
+          <input class="create_input" type="text" placeholder="Автор книги" name="book_author"/>
+          <input class="create_input" type="text" placeholder="Год издания книги" name="book_year"/>
           <button class="create_button">Добавить</button>
         </form>
       </div>
       <div class="todo_container">
+
         {% for books in books_list %}
-        <div
-          class="todo_item 
-          {% if books.is_favorite %} 
-          marked 
-          {% elif books.is_closed %} 
-          done 
-          {% endif %}"
-        >
+        <div class="todo_item 
+            {% if books.is_favorite %}
+                marked 
+            {% elif books.is_closed %} 
+                done 
+            {% endif %}">
+
           <div class="todo_item_header">
             <lable class="checkbox_container">
-              <input
-                type="checkbox"
-                {% if books.is_closed %}
-                checked
+              <input type="checkbox" 
+                {% if books.is_closed %} 
+                    checked 
                 {% endif %}
               />
               <span class="checkmark"></span>
             </lable>
-            <h4>
-              <a href="{% url 'closed-todo' book.id %}">{{ books.text }}</a>
-            </h4>
+            <h4><a href="{% url 'closed-todo' books.id %}">{{ books.text }}</a></h4>
           </div>
           <div class="todo_item_footer">
             <p>{{ books.created_at }}</p>
             <div class="action_buttons">
               {% if books.is_favorite %}
-              <a href="{% url 'mark-todo' book.id %}"><img src="{% static './icons/heart2.png' %}"/></a>
+                <a href="{% url 'mark-todo' books.id %}"><img src="{% static './icons/heart2.png' %}"/></a>
               {% else %}
-              <a href="{% url 'unmark-todo' book.id %}"><img src="{% static './icons/heart.png' %}"/></a>
+                <a href="{% url 'unmark-todo' books.id %}"><img src="{% static './icons/heart.png' %}"/></a>
               {% endif %}
-              <a href="{% url 'delete-todo' book.id %}"><img src="{% static './icons/basket.png' %}"/></a>
-              <a href="{% url 'book-detail' book.id %}"><button>Подробнее</button></a>
+
+                <a href="{% url 'delete-todo' books.id %}"><img src="{% static './icons/basket.png' %}"/></a>
+                <a href="{% url 'books-detail' books.id %}"><button>Подробнее</button></a>
             </div>
           </div>
         </div>
